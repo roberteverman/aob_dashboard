@@ -18,13 +18,22 @@ class DashboardTabBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          IconButton(
-            icon: Icon(
-              FontAwesomeIcons.home,
-              color: Colors.grey,
-            ),
-            iconSize: 30,
-            onPressed: () {},
+          Column(
+            children: [
+              IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(
+                  FontAwesomeIcons.home,
+                  color: Colors.grey,
+                ),
+                iconSize: 30,
+                onPressed: () {},
+              ),
+              Text(
+                "Home",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
           ),
           SizedBox(
             height: 30,
@@ -37,24 +46,62 @@ class DashboardTabBar extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          IconButton(
-            icon: Icon(
-              FontAwesomeIcons.road,
-              color: Colors.grey,
-            ),
-            iconSize: 30,
-            onPressed: () {},
+          Column(
+            children: [
+              IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(
+                  FontAwesomeIcons.road,
+                  color: Colors.grey,
+                ),
+                iconSize: 30,
+                onPressed: () {},
+              ),
+              Text(
+                "Airfields",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
           ),
           SizedBox(
             height: 30,
           ),
-          IconButton(
-            icon: Icon(
-              FontAwesomeIcons.rocket,
-              color: Colors.grey,
-            ),
-            iconSize: 30,
-            onPressed: () {},
+          Column(
+            children: [
+              IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(
+                  FontAwesomeIcons.rocket,
+                  color: Colors.grey,
+                ),
+                iconSize: 30,
+                onPressed: () {},
+              ),
+              Text(
+                "TBMs",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Column(
+            children: [
+              IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(
+                  FontAwesomeIcons.userShield,
+                  color: Colors.grey,
+                ),
+                iconSize: 30,
+                onPressed: () {},
+              ),
+              Text(
+                "GOB",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
           ),
           Expanded(
             child: SizedBox(),
