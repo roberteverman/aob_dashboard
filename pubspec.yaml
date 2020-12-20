@@ -35,6 +35,8 @@ dependencies:
   google_fonts: ^1.1.1
   get: ^3.22.2
   getwidget: ^1.1.0
+  percent_indicator: ^2.1.8
+  auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:

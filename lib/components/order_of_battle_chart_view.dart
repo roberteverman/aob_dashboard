@@ -2,10 +2,10 @@ import 'package:aob_dashboard/components/status_bar.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class OrderOfBattleChartView extends StatelessWidget {
-  const OrderOfBattleChartView({
+class AirOrderOfBattleChartView extends StatelessWidget {
+  const AirOrderOfBattleChartView({
     @required this.screenSize,
   });
 
@@ -183,10 +183,13 @@ class OrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .2,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
+                            lineHeight: 14.0,
+                            percent: 0.5,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
                           ),
                         ],
                       ),
@@ -206,10 +209,13 @@ class OrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .8,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
+                            lineHeight: 14.0,
+                            percent: 0.8,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
                           ),
                         ],
                       ),
@@ -229,10 +235,13 @@ class OrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .5,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
+                            lineHeight: 14.0,
+                            percent: 0.5,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
                           ),
                         ],
                       ),
@@ -252,10 +261,13 @@ class OrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .3,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
+                            lineHeight: 14.0,
+                            percent: 0.3,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
                           ),
                         ],
                       ),
@@ -275,10 +287,13 @@ class OrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .9,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
+                            lineHeight: 14.0,
+                            percent: 0.9,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
                           ),
                         ],
                       ),

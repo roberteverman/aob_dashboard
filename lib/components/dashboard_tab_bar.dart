@@ -1,4 +1,5 @@
 import 'package:aob_dashboard/helpers/dash_change_notifier.dart';
+import 'package:aob_dashboard/helpers/tab_change_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +79,7 @@ class TabBarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool selected = Provider.of<DashChangeNotifier>(context, listen: true).tabState[buttonIndex];
+    bool selected = Provider.of<TabChangeNotifier>(context, listen: true).tabState[buttonIndex];
 
     return Column(
       children: [
@@ -93,16 +94,9 @@ class TabBarButton extends StatelessWidget {
           ),
           iconSize: selected ? 50 : 30,
           onPressed: () {
-            Provider.of<DashChangeNotifier>(context, listen: false).changeTab(buttonIndex);
+            Provider.of<TabChangeNotifier>(context, listen: false).changeTab(buttonIndex);
           },
         ),
-        // Text(
-        //   buttonText,
-        //   style: TextStyle(
-        //     color: selected ? Colors.white : Colors.grey,
-        //     // fontSize: selected ? 0 : 13,
-        //   ),
-        // ),
       ],
     );
   }

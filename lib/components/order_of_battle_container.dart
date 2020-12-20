@@ -1,6 +1,7 @@
 import 'package:aob_dashboard/components/status_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class OrderOfBattleContainer extends StatelessWidget {
   OrderOfBattleContainer({this.airfield, this.aircraft, this.status});
@@ -180,11 +181,16 @@ class OrderOfBattleContainer extends StatelessWidget {
                         fontWeight: FontWeight.w300,
                       ),
                     )),
-                    DataCell(StatusBar(
-                      height: 10,
-                      width: 30,
-                      percentage: aircraft[index]['operational'] / aircraft[index]['total'],
-                    )),
+                    DataCell(
+                      LinearPercentIndicator(
+                        width: 50,
+                        lineHeight: 10.0,
+                        percent: aircraft[index]['operational'] / aircraft[index]['total'],
+                        animateFromLastPercent: true,
+                        backgroundColor: Colors.white24,
+                        progressColor: Colors.white,
+                      ),
+                    ),
                     DataCell(Text(
                       aircraft[index]['operational'].toString() + ' / ' + aircraft[index]['total'].toString(),
                       style: TextStyle(

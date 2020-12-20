@@ -1,4 +1,5 @@
 import 'package:aob_dashboard/helpers/dash_change_notifier.dart';
+import 'package:aob_dashboard/helpers/tab_change_notifier.dart';
 import 'package:aob_dashboard/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,10 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider<DashChangeNotifier>(create: (context) => DashChangeNotifier())],
+      providers: [
+        ChangeNotifierProvider<DashChangeNotifier>(create: (context) => DashChangeNotifier()),
+        ChangeNotifierProvider<TabChangeNotifier>(create: (context) => TabChangeNotifier()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'AOB Dashboard',
+        title: 'Dash.',
         theme: ThemeData.dark(),
         initialRoute: LandingScreen.id,
         routes: {
