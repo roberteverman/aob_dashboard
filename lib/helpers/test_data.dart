@@ -1,4 +1,4 @@
-List<Map> groundData = [
+List<Map> testGroundData = [
   {
     "parent": "1 Division",
     "strength": 0.14,
@@ -2223,7 +2223,7 @@ List<Map> groundData = [
   }
 ];
 
-List<Map> aircraftData = [
+List<Map> testAirData = [
   {
     "airfield": "Poseidon",
     "status": "OP",

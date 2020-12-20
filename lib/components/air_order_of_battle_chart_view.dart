@@ -1,4 +1,3 @@
-import 'package:aob_dashboard/components/status_bar.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -340,11 +339,14 @@ class AirOrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .7,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
-                          ),
+                            lineHeight: 14.0,
+                            percent: 0.7,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
+                          )
                         ],
                       ),
                       SizedBox(
@@ -363,11 +365,14 @@ class AirOrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .3,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
-                          ),
+                            lineHeight: 14.0,
+                            percent: 0.3,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
+                          )
                         ],
                       ),
                       SizedBox(
@@ -386,11 +391,14 @@ class AirOrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .5,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
-                          ),
+                            lineHeight: 14.0,
+                            percent: 0.5,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
+                          )
                         ],
                       ),
                       SizedBox(
@@ -409,11 +417,14 @@ class AirOrderOfBattleChartView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          StatusBar(
-                            percentage: .1,
-                            height: 15,
+                          LinearPercentIndicator(
                             width: widgetWidth / 1.75,
-                          ),
+                            lineHeight: 14.0,
+                            percent: 0.1,
+                            animateFromLastPercent: true,
+                            backgroundColor: Colors.white24,
+                            progressColor: Colors.white,
+                          )
                         ],
                       ),
                     ],

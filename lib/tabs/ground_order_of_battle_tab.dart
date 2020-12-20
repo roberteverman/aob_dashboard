@@ -1,6 +1,4 @@
-import 'dart:math';
-
-import 'package:aob_dashboard/components/order_of_battle_chart_view.dart';
+import 'package:aob_dashboard/components/ground_order_of_battle_chart_view.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +24,11 @@ class GroundOrderOfBattleTab extends StatelessWidget {
             child: StaggeredGridView.extent(
               padding: EdgeInsets.fromLTRB(50, 20, 20, 0),
               maxCrossAxisExtent: 600,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              staggeredTiles: List.generate(groundData.length, (index) => StaggeredTile.fit(1)),
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+              staggeredTiles: List.generate(testGroundData.length, (index) => StaggeredTile.fit(1)),
               children: List.generate(
-                groundData.length,
+                testGroundData.length,
                 (index) => GFAccordion(
                   titleBorderRadius: BorderRadius.circular(20),
                   contentBorderRadius: BorderRadius.circular(10),
@@ -43,7 +41,7 @@ class GroundOrderOfBattleTab extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            groundData[index]['parent'],
+                            testGroundData[index]['parent'],
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -58,9 +56,9 @@ class GroundOrderOfBattleTab extends StatelessWidget {
                           progressColor: Colors.red,
                           lineHeight: 25,
                           padding: EdgeInsets.symmetric(horizontal: 50),
-                          percent: groundData[index]['strength'],
+                          percent: testGroundData[index]['strength'],
                           center: Text(
-                            (groundData[index]['strength'] * 100).toString().split('.')[0] + "%",
+                            (testGroundData[index]['strength'] * 100).toString().split('.')[0] + "%",
                             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
                           ),
                         ),
@@ -160,9 +158,9 @@ class GroundOrderOfBattleTab extends StatelessWidget {
                                   dotData: FlDotData(show: false),
                                   isStrokeCapRound: true,
                                   spots: List.generate(
-                                      groundData[index]['strength_history'].length,
-                                      (spotsIndex) => FlSpot(24 - groundData[index]['strength_history'][spotsIndex]['hours_ago'],
-                                          groundData[index]['strength_history'][spotsIndex]['strength'])),
+                                      testGroundData[index]['strength_history'].length,
+                                      (spotsIndex) => FlSpot(24 - testGroundData[index]['strength_history'][spotsIndex]['hours_ago'],
+                                          testGroundData[index]['strength_history'][spotsIndex]['strength'])),
                                   isCurved: true,
                                   belowBarData: BarAreaData(
                                     show: true,
@@ -179,40 +177,40 @@ class GroundOrderOfBattleTab extends StatelessWidget {
                       ),
                       Column(
                         children: List.generate(
-                            groundData[index]['children'].length,
-                            (childIndex) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Center(
-                                          child: AutoSizeText(
-                                            groundData[index]['children'][childIndex]['child'],
-                                            maxFontSize: 15,
-                                            minFontSize: 5,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 3,
-                                        child: LinearPercentIndicator(
-                                          lineHeight: 15,
-                                          percent: groundData[index]['children'][childIndex]['strength'],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Center(
-                                            child:
-                                                Text((groundData[index]['children'][childIndex]['strength'] * 100).toString().split('.')[0] + "%")),
-                                      ),
-                                    ],
+                          testGroundData[index]['children'].length,
+                          (childIndex) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      testGroundData[index]['children'][childIndex]['child'],
+                                      maxFontSize: 15,
+                                      minFontSize: 5,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+                                    ),
                                   ),
-                                )),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: LinearPercentIndicator(
+                                    lineHeight: 15,
+                                    percent: testGroundData[index]['children'][childIndex]['strength'],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Center(
+                                      child: Text((testGroundData[index]['children'][childIndex]['strength'] * 100).toString().split('.')[0] + "%")),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -223,7 +221,7 @@ class GroundOrderOfBattleTab extends StatelessWidget {
           Expanded(
             flex: MediaQuery.of(context).size.width > 1500 ? 1 : 0,
             child: Container(
-              child: AirOrderOfBattleChartView(screenSize: MediaQuery.of(context).size),
+              child: GroundOrderOfBattleChartView(),
             ),
           )
         ],

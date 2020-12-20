@@ -12,6 +12,8 @@ class DashboardTitleBar extends StatelessWidget {
       "GHIJ",
     ];
 
+    TextEditingController textEditingController = new TextEditingController();
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 10, 10, 0),

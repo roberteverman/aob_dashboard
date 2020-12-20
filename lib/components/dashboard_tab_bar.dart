@@ -1,4 +1,5 @@
-import 'package:aob_dashboard/helpers/dash_change_notifier.dart';
+import 'package:aob_dashboard/helpers/data_change_notifier.dart';
+import 'package:aob_dashboard/helpers/military_fonts_icons.dart';
 import 'package:aob_dashboard/helpers/tab_change_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,32 +27,36 @@ class DashboardTabBar extends StatelessWidget {
           ),
           TabBarButton(
             buttonIndex: 0,
-            iconData: FontAwesomeIcons.plane,
-            buttonText: "Air",
+            iconData: MilitaryFonts.fighter2,
+            buttonText: "Air Order of Battle",
+            sizeMultiplier: 2,
           ),
           SizedBox(
             height: 30,
           ),
           TabBarButton(
             buttonIndex: 1,
-            iconData: FontAwesomeIcons.running,
-            buttonText: "Ground",
+            iconData: MilitaryFonts.tank,
+            buttonText: "Ground Order of Battle",
+            sizeMultiplier: 1.75,
           ),
           SizedBox(
             height: 30,
           ),
           TabBarButton(
             buttonIndex: 2,
-            iconData: FontAwesomeIcons.ship,
-            buttonText: "Navy",
+            iconData: MilitaryFonts.warship,
+            buttonText: "Navy Order of Battle",
+            sizeMultiplier: 2,
           ),
           SizedBox(
             height: 30,
           ),
           TabBarButton(
             buttonIndex: 3,
-            iconData: FontAwesomeIcons.rocket,
-            buttonText: "TBM",
+            iconData: MilitaryFonts.missile,
+            buttonText: "Missile Order of Battle",
+            sizeMultiplier: 1.5,
           ),
           SizedBox(
             height: 30,
@@ -71,11 +76,12 @@ class DashboardTabBar extends StatelessWidget {
 }
 
 class TabBarButton extends StatelessWidget {
-  const TabBarButton({this.iconData, this.buttonText, this.buttonIndex});
+  const TabBarButton({this.iconData, this.buttonText, this.buttonIndex, this.sizeMultiplier});
 
   final int buttonIndex;
   final IconData iconData;
   final String buttonText;
+  final double sizeMultiplier;
 
   @override
   Widget build(BuildContext context) {
@@ -86,15 +92,17 @@ class TabBarButton extends StatelessWidget {
         IconButton(
           hoverColor: Colors.transparent,
           splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           padding: EdgeInsets.zero,
           tooltip: buttonText,
           icon: Icon(
             iconData,
             color: selected ? Colors.white : Colors.grey,
           ),
-          iconSize: selected ? 50 : 30,
-          onPressed: () {
-            Provider.of<TabChangeNotifier>(context, listen: false).changeTab(buttonIndex);
+          iconSize: selected ? 50 * sizeMultiplier : 30 * sizeMultiplier,
+          onPressed: () async {
+            await Provider.of<TabChangeNotifier>(context, listen: false).changeTab(buttonIndex);
+            await Provider.of<DataChangeNotifier>(context, listen: false).updateAirData();
           },
         ),
       ],

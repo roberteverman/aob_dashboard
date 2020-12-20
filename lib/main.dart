@@ -1,4 +1,4 @@
-import 'package:aob_dashboard/helpers/dash_change_notifier.dart';
+import 'package:aob_dashboard/helpers/data_change_notifier.dart';
 import 'package:aob_dashboard/helpers/tab_change_notifier.dart';
 import 'package:aob_dashboard/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<DashChangeNotifier>(create: (context) => DashChangeNotifier()),
+        ChangeNotifierProvider<DataChangeNotifier>(create: (context) => DataChangeNotifier()),
         ChangeNotifierProvider<TabChangeNotifier>(create: (context) => TabChangeNotifier()),
       ],
       child: MaterialApp(

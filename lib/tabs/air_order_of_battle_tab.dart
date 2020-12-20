@@ -1,8 +1,9 @@
-import 'package:aob_dashboard/components/order_of_battle_chart_view.dart';
+import 'package:aob_dashboard/components/air_order_of_battle_chart_view.dart';
 import 'package:aob_dashboard/components/order_of_battle_container.dart';
-import 'package:aob_dashboard/helpers/test_data.dart';
+import 'package:aob_dashboard/helpers/data_change_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 class AirOrderOfBattleTab extends StatelessWidget {
   @override
@@ -24,13 +25,13 @@ class AirOrderOfBattleTab extends StatelessWidget {
               maxCrossAxisExtent: 400,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
-              staggeredTiles: List.generate(aircraftData.length, (index) => StaggeredTile.fit(1)),
+              staggeredTiles: List.generate(Provider.of<DataChangeNotifier>(context, listen: true).airData.length, (index) => StaggeredTile.fit(1)),
               children: List.generate(
-                aircraftData.length,
+                Provider.of<DataChangeNotifier>(context, listen: true).airData.length,
                 (index) => OrderOfBattleContainer(
-                  airfield: aircraftData[index]['airfield'],
-                  aircraft: aircraftData[index]['aircraft'],
-                  status: aircraftData[index]['status'],
+                  airfield: Provider.of<DataChangeNotifier>(context, listen: true).airData[index]['airfield'],
+                  aircraft: Provider.of<DataChangeNotifier>(context, listen: true).airData[index]['aircraft'],
+                  status: Provider.of<DataChangeNotifier>(context, listen: true).airData[index]['status'],
                 ),
               ),
             ),
