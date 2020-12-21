@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<void> navigateToLandingScreen() async {
       await Provider.of<DataChangeNotifier>(context, listen: false).updateAirData();
-      Navigator.popAndPushNamed(context, LandingScreen.id);
+      await Navigator.popAndPushNamed(context, LandingScreen.id);
     }
 
     return Scaffold(

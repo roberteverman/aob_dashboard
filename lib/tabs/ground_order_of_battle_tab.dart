@@ -23,7 +23,7 @@ class GroundOrderOfBattleTab extends StatelessWidget {
             flex: 3,
             child: StaggeredGridView.extent(
               padding: EdgeInsets.fromLTRB(50, 20, 20, 0),
-              maxCrossAxisExtent: 600,
+              maxCrossAxisExtent: 500,
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
               staggeredTiles: List.generate(testGroundData.length, (index) => StaggeredTile.fit(1)),

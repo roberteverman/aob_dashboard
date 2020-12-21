@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:aob_dashboard/helpers/data_change_notifier.dart';
 import 'package:aob_dashboard/helpers/military_fonts_icons.dart';
 import 'package:aob_dashboard/helpers/tab_change_notifier.dart';
+import 'package:aob_dashboard/models/airfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class DashboardTabBar extends StatelessWidget {
   const DashboardTabBar({
@@ -67,7 +72,7 @@ class DashboardTabBar extends StatelessWidget {
           IconButton(
             icon: Icon(FontAwesomeIcons.cogs),
             iconSize: 30,
-            onPressed: () {},
+            onPressed: () async {},
           ),
         ],
       ),
@@ -102,7 +107,6 @@ class TabBarButton extends StatelessWidget {
           iconSize: selected ? 50 * sizeMultiplier : 30 * sizeMultiplier,
           onPressed: () async {
             await Provider.of<TabChangeNotifier>(context, listen: false).changeTab(buttonIndex);
-            await Provider.of<DataChangeNotifier>(context, listen: false).updateAirData();
           },
         ),
       ],

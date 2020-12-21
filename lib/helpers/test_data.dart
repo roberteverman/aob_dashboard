@@ -2223,9 +2223,9 @@ List<Map> testGroundData = [
   }
 ];
 
-List<Map> testAirData = [
+List<dynamic> testAirData = [
   {
-    "airfield": "Poseidon",
+    "airfield": "Bobby",
     "status": "OP",
     "aircraft": [
       {"type": "C-130", "total": 13, "operational": 11},

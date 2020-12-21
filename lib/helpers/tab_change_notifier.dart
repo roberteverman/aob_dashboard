@@ -27,12 +27,6 @@ class TabChangeNotifier extends ChangeNotifier {
     switch (selectedIndex) {
       case 0:
         {
-          // String url = "https://my-json-server.typicode.com/roberteverman/demo/air";
-          // var response = await http.get(url);
-          // if (response.statusCode == 200) {
-          //   print(response.body);
-          // }
-
           tabContent = AirOrderOfBattleTab();
         }
         break;

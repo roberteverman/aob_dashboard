@@ -1,4 +1,3 @@
-import 'package:aob_dashboard/components/status_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -7,7 +6,7 @@ class OrderOfBattleContainer extends StatelessWidget {
   OrderOfBattleContainer({this.airfield, this.aircraft, this.status});
   final String airfield;
   final String status;
-  final List<Map> aircraft;
+  final List<dynamic> aircraft;
 
   @override
   Widget build(BuildContext context) {
