@@ -13,7 +13,7 @@ class DataChangeNotifier extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void updateAirData() async {
+  Future<void> updateAirData() async {
     String configString = await rootBundle.loadString('assets/config.json');
     Map configJSON = json.decode(configString);
 
@@ -35,6 +35,7 @@ class DataChangeNotifier extends ChangeNotifier {
         // // List<Map> blah = List<Map>.from(list);
         // // // airData = blah;
         // // print(blah[0]['airfield']);
+        print("finished");
       }
     }
     notifyListeners();

@@ -1,6 +1,7 @@
 import 'package:aob_dashboard/helpers/data_change_notifier.dart';
 import 'package:aob_dashboard/helpers/tab_change_notifier.dart';
 import 'package:aob_dashboard/screens/landing_screen.dart';
+import 'package:aob_dashboard/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Dash.',
         theme: ThemeData.dark(),
-        initialRoute: LandingScreen.id,
+        initialRoute: SplashScreen.id,
         routes: {
           LandingScreen.id: (context) => LandingScreen(),
+          SplashScreen.id: (context) => SplashScreen(),
         },
       ),
     );
