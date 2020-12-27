@@ -1,6 +1,10 @@
+import 'package:aob_dashboard/helpers/data_change_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class OrderOfBattleContainer extends StatelessWidget {
   OrderOfBattleContainer({this.airfield, this.aircraft, this.status});
@@ -10,6 +14,12 @@ class OrderOfBattleContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Form values
+    int formSelectionIndex = 0;
+    String dropdownValue = Provider.of<DataChangeNotifier>(context, listen: false).airfieldList[0];
+    bool formProcessing = false;
+
+    //Other
     Color statusColor;
     if (status == "OP") {
       statusColor = Colors.green;
@@ -81,94 +91,134 @@ class OrderOfBattleContainer extends StatelessWidget {
                 (index) => DataRow(
                   onSelectChanged: (selected) async {
                     int selectedNumber = 1;
+                    List<String> selections = ['Add', 'Move', 'Destroy'];
+                    dropdownValue = airfield;
+                    formProcessing = false;
 
                     return await showDialog(
-                      barrierDismissible: true,
+                      barrierDismissible: false,
                       context: context,
                       builder: (_) => new StatefulBuilder(builder: (_, setState) {
                         return AlertDialog(
-                          title: Column(
-                            children: [
-                              Text("Make changes to:"),
-                              Text(
-                                airfield + "-based " + aircraft[index]['type'] + 's',
-                                style: TextStyle(fontSize: 15),
-                              ),
-                            ],
-                          ),
-                          content: FittedBox(
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      splashRadius: 20,
-                                      icon: Icon(
-                                        FontAwesomeIcons.minusCircle,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          if (selectedNumber > 1) {
-                                            selectedNumber--;
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(width: 20),
-                                    Text(
-                                      selectedNumber.toString(),
-                                      style: TextStyle(fontSize: 30),
-                                    ),
-                                    SizedBox(width: 20),
-                                    IconButton(
-                                      splashRadius: 20,
-                                      icon: Icon(FontAwesomeIcons.plusCircle),
-                                      onPressed: () {
-                                        setState(() {
-                                          if (selectedNumber < int.parse(aircraft[index]['total'].toString())) {
-                                            selectedNumber++;
-                                          }
-                                        });
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                Row(
-                                  children: [
-                                    MaterialButton(
-                                      child: Text(
-                                        "Add",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      color: Colors.green,
-                                      onPressed: () {},
-                                    ),
-                                    SizedBox(width: 20),
-                                    MaterialButton(
-                                      child: Text(
-                                        "Move",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      color: Colors.blue,
-                                      onPressed: () {},
-                                    ),
-                                    SizedBox(width: 20),
-                                    MaterialButton(
-                                      child: Text(
-                                        "Destroy",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      color: Colors.red,
-                                      onPressed: () {},
-                                    )
-                                  ],
-                                )
-                              ],
+                          title: Center(
+                            child: Text(
+                              airfield + " " + aircraft[index]['type'] + 's',
+                              style: TextStyle(fontSize: 20),
                             ),
                           ),
+                          content: FittedBox(
+                            child: Container(
+                              width: 300,
+                              child: formProcessing
+                                  ? LoadingBouncingLine.circle()
+                                  : Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: List<Widget>.generate(3, (int index) {
+                                            return ChoiceChip(
+                                              selectedColor: Colors.white,
+                                              label: Text(selections[index]),
+                                              selected: formSelectionIndex == index,
+                                              onSelected: (bool selected) {
+                                                setState(() {
+                                                  formSelectionIndex = selected ? index : null;
+                                                });
+                                              },
+                                            );
+                                          }),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text("Number to " + selections[formSelectionIndex].toLowerCase() + ":"),
+                                                Expanded(
+                                                  child: Container(),
+                                                ),
+                                                IconButton(
+                                                  splashRadius: 20,
+                                                  icon: Icon(
+                                                    FontAwesomeIcons.minusCircle,
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      if (selectedNumber > 1) {
+                                                        selectedNumber--;
+                                                      }
+                                                    });
+                                                  },
+                                                ),
+                                                SizedBox(width: 20),
+                                                Text(
+                                                  selectedNumber.toString(),
+                                                  style: TextStyle(fontSize: 30),
+                                                ),
+                                                SizedBox(width: 20),
+                                                IconButton(
+                                                  splashRadius: 20,
+                                                  icon: Icon(FontAwesomeIcons.plusCircle),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      if (selectedNumber < int.parse(aircraft[index]['total'].toString())) {
+                                                        selectedNumber++;
+                                                      }
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                            formSelectionIndex == 1
+                                                ? Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                                                    Text("Move to:"),
+                                                    DropdownButton<String>(
+                                                      value: dropdownValue,
+                                                      onChanged: (String newValue) {
+                                                        setState(() {
+                                                          dropdownValue = newValue;
+                                                        });
+                                                      },
+                                                      items: Provider.of<DataChangeNotifier>(context, listen: false)
+                                                          .airfieldList
+                                                          .map<DropdownMenuItem<String>>((String value) {
+                                                        return DropdownMenuItem<String>(
+                                                          value: value,
+                                                          child: Text(value),
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                  ])
+                                                : Container()
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                            ),
+                          ),
+                          actions: [
+                            MaterialButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Cancel"),
+                            ),
+                            MaterialButton(
+                              onPressed: () async {
+                                setState(() {
+                                  formProcessing = true;
+                                });
+                                await Provider.of<DataChangeNotifier>(context, listen: false)
+                                    .pushAirData(formSelectionIndex, selectedNumber, airfield, dropdownValue);
+                                formProcessing = false;
+                                Navigator.pop(context);
+                              },
+                              child: Text("Submit"),
+                            )
+                          ],
                         );
                       }),
                     );

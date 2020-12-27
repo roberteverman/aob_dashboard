@@ -5,16 +5,26 @@ import 'package:aob_dashboard/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   static const String id = "splash_screen";
 
   @override
-  Widget build(BuildContext context) {
-    Future<void> navigateToLandingScreen() async {
-      await Provider.of<DataChangeNotifier>(context, listen: false).updateAirData();
-      await Navigator.popAndPushNamed(context, LandingScreen.id);
-    }
+  _SplashScreenState createState() => _SplashScreenState();
+}
 
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    Provider.of<DataChangeNotifier>(context, listen: false).updateAirData();
+    super.initState();
+  }
+
+  Future<void> navigateToLandingScreen() async {
+    await Navigator.pushNamed(context, LandingScreen.id);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,7 +37,7 @@ class SplashScreen extends StatelessWidget {
             child: TypewriterAnimatedTextKit(
               text: ["  Dash."],
               textStyle: TextStyle(fontSize: 100.0, color: Colors.white),
-              speed: Duration(milliseconds: 400),
+              speed: Duration(milliseconds: 300),
               // pause: Duration(seconds: 5),
               repeatForever: false,
               isRepeatingAnimation: false,

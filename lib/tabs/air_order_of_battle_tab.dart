@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aob_dashboard/components/air_order_of_battle_chart_view.dart';
 import 'package:aob_dashboard/components/order_of_battle_container.dart';
 import 'package:aob_dashboard/helpers/data_change_notifier.dart';
@@ -12,36 +14,57 @@ class AirOrderOfBattleTab extends StatefulWidget {
 }
 
 class _AirOrderOfBattleTabState extends State<AirOrderOfBattleTab> {
-  bool loading = false;
+  Timer timer;
 
   @override
   void initState() {
     if (Provider.of<DataChangeNotifier>(context, listen: false).airData == null) {
       loadData();
     }
+    startTimer();
     super.initState();
   }
 
+  void startTimer() {
+    timer = new Timer.periodic(Duration(seconds: Provider.of<DataChangeNotifier>(context, listen: false).refreshRate), (timer) {
+      loadData();
+    });
+  }
+
   void loadData() async {
-    loading = true;
+    Provider.of<DataChangeNotifier>(context, listen: false).loading = true;
     await Provider.of<DataChangeNotifier>(context, listen: false).updateAirData();
     setState(() {
-      loading = false;
+      Provider.of<DataChangeNotifier>(context, listen: false).loading = false;
     });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    print("timer cancelled");
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return loading == true
-        ? LoadingBouncingGrid.square()
+    return Provider.of<DataChangeNotifier>(context, listen: true).loading == true
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              LoadingBouncingGrid.square(),
+              Text("Loading..."),
+            ],
+          )
         : Row(
             children: [
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(50)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(40), bottomLeft: Radius.circular(40)),
                     border: Border.all(color: Colors.black, width: 3),
                     color: Colors.black,
                   ),

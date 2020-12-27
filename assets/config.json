@@ -1,5 +1,8 @@
 {
-"use_test_data": false,
-"aob":"https://my-json-server.typicode.com/roberteverman/demo/air",
-"gob":""
+  "use_test_data": false,
+  "refresh_rate": 20,
+  "aob_get":"https://my-json-server.typicode.com/roberteverman/demo/air",
+  "aob_post":"https://my-json-server.typicode.com/roberteverman/demo/air",
+  "gob_get":"",
+  "gob_post": ""
 }

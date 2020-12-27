@@ -1,5 +1,6 @@
 import 'package:aob_dashboard/components/dashboard_tab_bar.dart';
 import 'package:aob_dashboard/components/dashboard_title_bar.dart';
+import 'package:aob_dashboard/helpers/data_change_notifier.dart';
 import 'package:aob_dashboard/helpers/tab_change_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class _LandingScreenState extends State<LandingScreen> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(41, 41, 41, 1),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DashboardTitleBar(),
           Expanded(
@@ -41,6 +43,29 @@ class _LandingScreenState extends State<LandingScreen> {
                 Expanded(
                   child: Provider.of<TabChangeNotifier>(context, listen: true).tabContent,
                 ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Row(
+              children: [
+                Expanded(child: SizedBox()),
+                Text(
+                  "CAO: 2020-12-26T12:35",
+                  style: TextStyle(color: Colors.white),
+                ),
+                IconButton(
+                  splashColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  icon: Icon(Icons.refresh),
+                  onPressed: () async {
+                    Provider.of<DataChangeNotifier>(context, listen: false).setLoading(true);
+                    await Provider.of<DataChangeNotifier>(context, listen: false).updateAirData();
+                    Provider.of<DataChangeNotifier>(context, listen: false).setLoading(false);
+                  },
+                )
               ],
             ),
           ),
