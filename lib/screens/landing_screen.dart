@@ -52,7 +52,7 @@ class _LandingScreenState extends State<LandingScreen> {
               children: [
                 Expanded(child: SizedBox()),
                 Text(
-                  "CAO: 2020-12-26T12:35",
+                  Provider.of<DataChangeNotifier>(context, listen: true).datetime,
                   style: TextStyle(color: Colors.white),
                 ),
                 IconButton(

@@ -12,6 +12,7 @@ class DataChangeNotifier extends ChangeNotifier {
   int refreshRate = 20;
   bool loading = false;
   List<String> airfieldList = [];
+  String datetime = "Null";
 
   void setLoading(bool isLoading) {
     loading = isLoading;
@@ -20,7 +21,7 @@ class DataChangeNotifier extends ChangeNotifier {
 
   Future<void> updateAirData() async {
     print("Updating Air Data");
-    String configString = await rootBundle.loadString('assets/config.json');
+    String configString = await rootBundle.loadString('config/config.json');
     Map configJSON = json.decode(configString);
     refreshRate = configJSON['refresh_rate'];
     if (configJSON['use_test_data'] == false) {
@@ -28,7 +29,8 @@ class DataChangeNotifier extends ChangeNotifier {
       String url = configJSON['aob_get'];
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        var retrievedData = json.decode(response.body).toList();
+        var retrievedData = json.decode(response.body)['data'].toList();
+        datetime = json.decode(response.body)['datetime'];
         for (int i = 0; i < retrievedData.length; i++) {
           Airfield newEntry = Airfield.fromJson(retrievedData[i]);
           airData.add(newEntry);
@@ -36,8 +38,9 @@ class DataChangeNotifier extends ChangeNotifier {
       }
     } else {
       airData = [];
-      for (int i = 0; i < testAirData.length; i++) {
-        Airfield newEntry = Airfield.fromJson(testAirData[i]);
+      datetime = testAirData['datetime'];
+      for (int i = 0; i < testAirData['data'].length; i++) {
+        Airfield newEntry = Airfield.fromJson(testAirData['data'][i]);
         airData.add(newEntry);
       }
     }
@@ -52,7 +55,7 @@ class DataChangeNotifier extends ChangeNotifier {
 
   Future<void> pushAirData(int action, int number, String origin, String destination) async {
     print("Pushing Air Data");
-    String configString = await rootBundle.loadString('assets/config.json');
+    String configString = await rootBundle.loadString('config/config.json');
     Map configJSON = json.decode(configString);
     if (configJSON['use_test_data'] == false) {
       String url = configJSON['aob_post'];

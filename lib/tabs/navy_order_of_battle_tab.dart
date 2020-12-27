@@ -10,8 +10,9 @@ class NavyOrderOfBattleTab extends StatelessWidget {
         color: Colors.black,
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("NOB"),
+          Text("No naval order of battle to display."),
         ],
       ),
     );

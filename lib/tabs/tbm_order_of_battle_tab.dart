@@ -10,8 +10,9 @@ class TBMOrderOfBattleTab extends StatelessWidget {
         color: Colors.black,
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("TOB"),
+          Text("No TBM order of battle to display."),
         ],
       ),
     );
