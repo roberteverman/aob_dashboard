@@ -212,7 +212,7 @@ class OrderOfBattleContainer extends StatelessWidget {
                                   formProcessing = true;
                                 });
                                 await Provider.of<DataChangeNotifier>(context, listen: false)
-                                    .pushAirData(formSelectionIndex, selectedNumber, airfield, dropdownValue);
+                                    .pushAirData(formSelectionIndex, selectedNumber, aircraft[index]['type'], airfield, dropdownValue);
                                 formProcessing = false;
                                 Navigator.pop(context);
                               },

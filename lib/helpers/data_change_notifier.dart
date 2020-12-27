@@ -53,19 +53,20 @@ class DataChangeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> pushAirData(int action, int number, String origin, String destination) async {
+  Future<void> pushAirData(int action, int number, String item, String origin, String destination) async {
     print("Pushing Air Data");
     String configString = await rootBundle.loadString('config/config.json');
     Map configJSON = json.decode(configString);
     if (configJSON['use_test_data'] == false) {
       String url = configJSON['aob_post'];
       // print(url);
-      // print(jsonEncode(<String, dynamic>{
-      //   'action': action,
-      //   'number': number,
-      //   'origin': origin,
-      //   'destination': destination,
-      // }));
+      print(jsonEncode(<String, dynamic>{
+        'action': action,
+        'number': number,
+        'item': item,
+        'origin': origin,
+        'destination': destination,
+      }));
       var response = await http.post(
         url,
         headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8'},
